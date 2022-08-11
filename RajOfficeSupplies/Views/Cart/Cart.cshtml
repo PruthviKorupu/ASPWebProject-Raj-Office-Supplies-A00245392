@@ -1,0 +1,53 @@
+﻿@using BLL.DTOs
+@model RajOfficeSupplies.Models.CartModel
+
+@{ ViewData["Title"] = "Cart";
+	Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+@{ decimal total = 0; }
+<table class="table">
+	<thead class="thead-light">
+		<tr>
+			<th scope="col">Product</th>
+			<th scope="col">Shop</th>
+			<th scope="col">Price</th>
+			<th scope="col">Quantity</th>
+			<th scope="col">Total</th>
+			<th scope="col">Remove</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (CartOrderItem c in Model.Items)
+		{
+			<tr>
+				<td class="align-middle">
+					<a asp-controller="Product" asp-action="ShowProduct" asp-route-stockId="@c.Stock.Id">
+						<img class="cart-image" src="@c.Stock.Product.PicturePath">
+						@c.Stock.Product.Name
+					</a>
+				</td>
+				<td class="align-middle">@c.Stock.Shop.Name</td>
+				<td class="align-middle">@c.Stock.Price</td>
+				<td class="align-middle">
+					<a style="text-decoration: none;" asp-controller="Cart" asp-action="RemoveItemFromCartByMinus"
+					   asp-route-itemId="@c.Id" asp-route-stockId="@c.Stock.Id">-</a>
+					@c.Quantity
+					<a style="text-decoration: none;" asp-controller="Cart" asp-action="AddItemToCartByPlus" asp-route-stockId="@c.Stock.Id">+</a>
+				</td>
+				<td class="align-middle">@c.Price</td>
+				<td class="align-middle">
+					<a style="text-decoration: none;" asp-controller="Cart" asp-action="RemoveItemFromCartByX"
+					   asp-route-itemId="@c.Id" asp-route-stockId="@c.Stock.Id">x</a>
+				</td>
+			</tr>
+			total += c.Price;
+		}
+	</tbody>
+</table>
+<h2>Sum: @total</h2>
+
+
+@if (Model.Items.Count > 0)
+{
+	<a class="btn btn-primary" role="button" asp-controller="Order" asp-action="CreateOrder">Go to create order</a>
+}

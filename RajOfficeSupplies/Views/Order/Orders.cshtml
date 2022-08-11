@@ -1,0 +1,35 @@
+﻿@using BLL.DTOs
+@model List<Order>
+
+@{
+	ViewData["Title"] = "Orders";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Your orders:</h1>
+
+<table class="table">
+	<thead class="thead-light">
+		<tr>
+			<th scope="col">Order</th>
+			<th scope="col">Status</th>
+			<th scope="col">Created</th>
+			<th scope="col">Total amount</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Order o in Model)
+		{
+			<tr>
+				<td class="align-middle">
+					<a asp-controller="Order" asp-action="Order" asp-route-orderId="@o.Id">
+						#@o.Id
+					</a>
+				</td>
+				<td class="align-middle">@o.OrderStatus.Name</td>
+				<td class="align-middle">@o.Date</td>
+				<td class="align-middle">@o.TotalAmount</td>
+			</tr>
+		}
+	</tbody>
+</table>

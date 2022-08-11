@@ -1,0 +1,47 @@
+﻿@using BLL.DTOs
+@model BLL.DTOs.Order
+
+@{
+	ViewData["Title"] = "Order#" + Model.Id;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Order#@Model.Id</h1>
+<h3>Created: @Model.Date</h3>
+
+<h3>Status: @Model.OrderStatus.Name</h3>
+<h3>Address: @Model.Address.Street, @Model.Address.City, @Model.Address.Zip</h3>
+
+<h2>Items:</h2>
+<table class="table">
+	<thead class="thead-light">
+		<tr>
+			<th scope="col">Product</th>
+			<th scope="col">Shop</th>
+			<th scope="col">Price</th>
+			<th scope="col">Quantity</th>
+			<th scope="col">Total</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (CartOrderItem c in Model.CartOrderItems)
+		{
+			<tr>
+				<td class="align-middle">
+					<a asp-controller="Product" asp-action="ShowProduct" asp-route-stockId="@c.Stock.Id">
+						<img class="cart-image" src="@c.Stock.Product.PicturePath">
+						@c.Stock.Product.Name
+					</a>
+				</td>
+				<td class="align-middle">@c.Stock.Shop.Name</td>
+				<td class="align-middle">@c.Stock.Price</td>
+				<td class="align-middle">
+					@c.Quantity
+				</td>
+				<td class="align-middle">@c.Price</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<h2>Total: @Model.TotalAmount</h2>

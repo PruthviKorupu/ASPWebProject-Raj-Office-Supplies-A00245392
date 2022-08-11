@@ -1,8 +1,122 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using BLL.DTOs
+@model RajOfficeSupplies.Models.HomePageModel
+
+@{
+	ViewData["Title"] = "Home Page";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1>Shops</h1>
+<div id="carouselShops" class="carousel slide" data-bs-ride="carousel">
+	<div class="carousel-indicators">
+		@for (int i = 0; i < Model.Shops.Count; i++)
+		{
+			if (i == 0)
+			{
+				<button type="button" data-bs-target="#carouselShops" data-bs-slide-to="@i" class="active" aria-current="true" aria-label="Slide @(i + 1)"></button>
+			}
+			else
+			{
+				<button type="button" data-bs-target="#carouselShops" data-bs-slide-to="@i" aria-label="Slide @(i + 1)"></button>
+			}
+		}
+	</div>
+	<div class="carousel-inner">
+
+		@for (int i = 0; i < Model.Shops.Count; i++)
+		{
+			<div class="carousel-item @(i == 0 ? "active" : "")">
+				<div class="container d-block w-100r">
+					<div class="row">
+						<a asp-controller="Product" asp-action="Products" asp-route-shopId="@i" style="padding: 0px 0px 0px 0px;">
+							<img src="@Model.Shops[i].PicturePath" style="padding: 0px 0px 0px 0px; width:100%">
+						</a>
+					</div>
+				</div>
+			</div>	
+		}
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselShops" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselShops" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Next</span>
+	</button>
 </div>
+
+<div class="row" style="height: 50px;"></div>
+
+<h1>Categories</h1>
+<div id="carouselProductCategories" class="carousel slide" data-bs-ride="carousel">
+	<div class="carousel-indicators">
+		@for (int i = 0; i < Model.Categories.Count / 4; i++)
+		{
+			if (i == 0)
+			{
+				<button type="button" data-bs-target="#carouselProductCategories" data-bs-slide-to="@i" class="active" aria-current="true" aria-label="Slide @(i + 1)"></button>
+			}
+			else
+			{
+				<button type="button" data-bs-target="#carouselProductCategories" data-bs-slide-to="@i" aria-label="Slide @(i + 1)"></button>
+			}
+		}
+	</div>
+
+	<div class="carousel-inner">
+		@{int j = 0;}
+		@for (int i = 0; i < Model.Categories.Count / 4; i++)
+		{
+				<div class="carousel-item @(i == 0 ? "active" : "")">
+					<div class="container d-block w-100r">
+						<div class="row" style="height: 250px">
+							<div class="col" style="background-color: #609356;">
+								<a class="categ-link" asp-controller="Product" asp-action="Products" asp-route-categoryId="@j" >
+									<h1 class="categ-h">
+										@Model.Categories[j].Name
+									</h1>
+								</a>
+							</div>
+							<div class="col" style="background-color: #F95504;">
+								<a class="categ-link" asp-controller="Product" asp-action="Products" asp-route-categoryId="@(j+1)">
+									<h1 class="categ-h">
+										@Model.Categories[j + 1].Name
+									</h1>
+								</a>
+							</div>
+						</div>
+						<div class="row" style="height: 250px">
+							<div class="col" style="background-color: #BC3D9E;">
+								<a class="categ-link" asp-controller="Product" asp-action="Products" asp-route-categoryId="@(j+2)">
+									<h1 class="categ-h">
+										@Model.Categories[j + 2].Name
+									</h1>
+								</a>
+							</div>
+							<div class="col" style="background-color: #EF9710;">
+								<a class="categ-link" asp-controller="Product" asp-action="Products" asp-route-categoryId="@(j+3)">
+									<h1 class="categ-h">
+										@Model.Categories[j + 3].Name
+									</h1>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			j += 4;
+		}
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselProductCategories" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselProductCategories" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Next</span>
+	</button>
+</div>
+
+
+
+
