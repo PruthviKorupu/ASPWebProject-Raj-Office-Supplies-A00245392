@@ -136,6 +136,21 @@ namespace RajOfficeSupplies.Controllers
         }
 
        
-
+        public void SendEmailCustom(string body, string email, string subject)
+        {
+            MailMessage mail = new MailMessage();
+            mail.To.Add(email);
+            mail.From = new MailAddress("testweblab6@gmail.com");
+            mail.Subject = subject;
+            mail.Body = body;
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential("testweblab6@gmail.com", "tktivfvbhqbldrtr");
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+        }
     }
 }

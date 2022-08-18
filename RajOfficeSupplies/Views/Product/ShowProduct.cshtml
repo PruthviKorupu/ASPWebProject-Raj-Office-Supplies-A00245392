@@ -1,0 +1,23 @@
+﻿@model RajOfficeSupplies.Models.StockModel
+@{
+	ViewData["Title"] = Model.Stock.Product.Name;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.Stock.Product.Name</h1>
+<img class="prod-image" src="@Model.Stock.Product.PicturePath" />
+<h6>Price @Model.Stock.Price</h6>
+
+<h3>In stock: @Model.Stock.Quantity</h3>
+<h3>
+	Quantity (to cart):
+	<a style="text-decoration: none;" asp-controller="Product" asp-action="DecreaseQuantity"
+	   asp-route-stockId="@Model.Stock.Id" asp-route-quantity="@Model.Quantity">-</a>
+	@Model.Quantity
+	<a style="text-decoration: none;" asp-controller="Product" asp-action="IncreaseQuantity"
+	   asp-route-stockId="@Model.Stock.Id" asp-route-quantity="@Model.Quantity">+</a>
+</h3>
+
+<form asp-controller="Cart" asp-action="AddItemToCartFromProductPage" asp-route-stockId="@Model.Stock.Id" asp-route-quantity="@Model.Quantity">
+	<button class="btn btn-primary" type="submit">Add to cart</button>
+</form>

@@ -31,6 +31,10 @@ namespace RajOfficeSupplies.Controllers
 		[HttpGet]
 		public IActionResult Index()
 		{
+			//RajOfficeSuppliesDbContext context = new RajOfficeSuppliesDbContext();
+			//var stocks = context.Stocks
+			//	.Include(s => s.Product)
+			//	.ToList();
 
 			HomePageModel model = new HomePageModel(_shopService.GetAllShops().ToList(),
 				_categoryService.GetAllCategories().ToList());

@@ -4684,7 +4684,7 @@
     } // Getters
 
 
-    var _proto = MoRajOfficeSuppliesLibrary.prototype;
+    var _proto = Modal.prototype;
 
     // Public
     _proto.toggle = function toggle(relatedTarget) {
@@ -5009,7 +5009,7 @@
       }
     } // ----------------------------------------------------------------------
     // the following methods are used to handle overflowing modals
-    // todo (fat): these should probably be refactored out of moRajOfficeSuppliesLibrary.js
+    // todo (fat): these should probably be refactored out of modal.js
     // ----------------------------------------------------------------------
     ;
 
@@ -5099,7 +5099,7 @@
     } // Static
     ;
 
-    MoRajOfficeSuppliesLibrary._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
+    Modal._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
       return this.each(function () {
         var data = $(this).data(DATA_KEY$5);
 
@@ -5172,7 +5172,7 @@
       });
     });
 
-    MoRajOfficeSuppliesLibrary._jQueryInterface.call($(target), config, this);
+    Modal._jQueryInterface.call($(target), config, this);
   });
   /**
    * ------------------------------------------------------------------------
@@ -5180,12 +5180,12 @@
    * ------------------------------------------------------------------------
    */
 
-  $.fn[NAME$5] = MoRajOfficeSuppliesLibrary._jQueryInterface;
+  $.fn[NAME$5] = Modal._jQueryInterface;
   $.fn[NAME$5].Constructor = Modal;
 
   $.fn[NAME$5].noConflict = function () {
     $.fn[NAME$5] = JQUERY_NO_CONFLICT$5;
-    return MoRajOfficeSuppliesLibrary._jQueryInterface;
+    return Modal._jQueryInterface;
   };
 
   /**

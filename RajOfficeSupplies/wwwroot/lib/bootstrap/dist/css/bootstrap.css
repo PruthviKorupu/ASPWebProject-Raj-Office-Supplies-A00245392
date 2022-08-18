@@ -5744,7 +5744,7 @@ a.close.disabled {
   pointer-events: none;
 }
 
-.moRajOfficeSuppliesLibrary.fade .modal-dialog {
+.modal.fade .modal-dialog {
   transition: -webkit-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
   transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
@@ -5753,12 +5753,12 @@ a.close.disabled {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .moRajOfficeSuppliesLibrary.fade .modal-dialog {
+  .modal.fade .modal-dialog {
     transition: none;
   }
 }
 
-.moRajOfficeSuppliesLibrary.show .modal-dialog {
+.modal.show .modal-dialog {
   -webkit-transform: none;
   transform: none;
 }
